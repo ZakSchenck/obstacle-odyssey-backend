@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 from src.constants.http_status_codes import (
     HTTP_200_OK,
     HTTP_201_CREATED,
+    HTTP_404_NOT_FOUND
 )
 import os
 
@@ -48,6 +49,19 @@ def get_all_players():
             'updated_at': player.updated_at,
             'username': player.username,
         }), HTTP_201_CREATED
+
+@app.route('/api/v1/player/<int:id>', methods=['DELETE'])
+def delete_player(id):
+    player = Player.query.get(id)
+    
+    if not player:
+        return jsonify({'message': 'Player not found'}), HTTP_404_NOT_FOUND
+
+    db.session.delete(player)
+    db.session.commit()
+
+    return jsonify({'message': f"Player with the ID of {id} has been deleted successfully"}), HTTP_204_NO_CONTENT
+
 
 if __name__ == '__main__':
     app.run()
