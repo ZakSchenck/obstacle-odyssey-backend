@@ -6,7 +6,8 @@ from src.constants.http_status_codes import (
     HTTP_200_OK,
     HTTP_201_CREATED,
     HTTP_404_NOT_FOUND,
-    HTTP_204_NO_CONTENT
+    HTTP_204_NO_CONTENT,
+    HTTP_401_UNAUTHORIZED
 )
 import os
 
@@ -53,6 +54,10 @@ def get_all_players():
 
 @app.route('/api/v1/player/<int:id>', methods=['DELETE'])
 def delete_player(id):
+    provided_api_key = request.headers.get('API_KEY')
+
+    if provided_api_key != api_key:
+        return jsonify({'message': 'Invalid API key'}), HTTP_401_UNAUTHORIZED
     player = Player.query.get(id)
     
     if not player:
@@ -62,6 +67,9 @@ def delete_player(id):
     db.session.commit()
 
     return jsonify({'message': f"Player with the ID of {id} has been deleted successfully"}), HTTP_204_NO_CONTENT
+
+# ... Other routes and app.run() ...
+
 
 
 if __name__ == '__main__':
