@@ -13,7 +13,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../instance/leaderboard.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 api_key = os.environ.get('API_KEY')
 
-from .models import db, Player
+from src.models import db, Player
 
 db.init_app(app)
 migrate = Migrate(app, db)
