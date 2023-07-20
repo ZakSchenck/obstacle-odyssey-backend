@@ -6,7 +6,6 @@ from src.constants.http_status_codes import (
     HTTP_200_OK,
     HTTP_201_CREATED,
     HTTP_404_NOT_FOUND,
-    HTTP_204_NO_CONTENT,
     HTTP_401_UNAUTHORIZED
 )
 import os
@@ -21,7 +20,7 @@ migrate = Migrate(app, db)
 with app.app_context():
     db.create_all()
 
-@app.route('/api/v1/players/', methods=['GET', 'DELETE', 'POST'])
+@app.route('/api/v1/players', methods=['GET', 'POST'])
 def get_all_players():
     if request.method == 'GET':
         all_players = Player.query.order_by(Player.score.desc()).all()
@@ -66,10 +65,7 @@ def delete_player(id):
     db.session.delete(player)
     db.session.commit()
 
-    return jsonify({'message': f"Player with the ID of {id} has been deleted successfully"}), HTTP_204_NO_CONTENT
-
-# ... Other routes and app.run() ...
-
+    return jsonify({'message': f"Player with the ID of {id} has been deleted successfully"}), HTTP_200_OK, {'Content-Type': 'application/json'}
 
 
 if __name__ == '__main__':
