@@ -10,7 +10,6 @@ from src.constants.http_status_codes import (
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../instance/leaderboard.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-api_key = 'z@ch4ryD@t@b4se'
 db.init_app(app)
 migrate = Migrate(app, db)
 
