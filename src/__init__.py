@@ -13,14 +13,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../instance/leaderboard.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 api_key = os.environ.get('API_KEY')
 
-# Import the db instance from models.py
-from models import db
+from .models import db, Player
 
 db.init_app(app)
 migrate = Migrate(app, db)
-
-# Import the Player model from models.py
-from models import Player
 
 @app.route('/api/v1/players/', methods=['GET', 'POST'])
 def get_all_players():
