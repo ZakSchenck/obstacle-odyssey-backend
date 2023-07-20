@@ -1,5 +1,4 @@
 from flask import Flask, jsonify, request
-from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from src.constants.http_status_codes import (
     HTTP_200_OK,
@@ -14,15 +13,14 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../instance/leaderboard.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 api_key = os.environ.get('API_KEY')
 
-db = SQLAlchemy(app)
+# Import the db instance from models.py
+from models import db
+
+db.init_app(app)
 migrate = Migrate(app, db)
 
-class Player(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.Text, nullable=False)
-    score = db.Column(db.Integer, nullable=False)
-    created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
-    updated_at = db.Column(db.DateTime, default=db.func.current_timestamp(), onupdate=db.func.current_timestamp())
+# Import the Player model from models.py
+from models import Player
 
 @app.route('/api/v1/players/', methods=['GET', 'POST'])
 def get_all_players():
