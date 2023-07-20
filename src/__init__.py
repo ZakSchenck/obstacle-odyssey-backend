@@ -5,7 +5,8 @@ from flask_migrate import Migrate
 from src.constants.http_status_codes import (
     HTTP_200_OK,
     HTTP_201_CREATED,
-    HTTP_404_NOT_FOUND
+    HTTP_404_NOT_FOUND,
+    HTTP_204_NO_CONTENT
 )
 import os
 
