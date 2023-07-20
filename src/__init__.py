@@ -20,7 +20,7 @@ migrate = Migrate(app, db)
 with app.app_context():
     db.create_all()
 
-@app.route('/api/v1/players', methods=['GET', 'POST'])
+@app.route('/api/v1/players/', methods=['GET', 'POST'])
 def get_all_players():
     if request.method == 'GET':
         all_players = Player.query.order_by(Player.score.desc()).all()
@@ -51,7 +51,7 @@ def get_all_players():
             'username': player.username,
         }), HTTP_201_CREATED
 
-@app.route('/api/v1/player/<int:id>', methods=['DELETE'])
+@app.route('/api/v1/player/<int:id>/', methods=['DELETE'])
 def delete_player(id):
     provided_api_key = request.headers.get('API_KEY')
 
