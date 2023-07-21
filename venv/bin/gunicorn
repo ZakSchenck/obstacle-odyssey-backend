@@ -1,4 +1,4 @@
-#!/Users/zakschenck/Desktop/flappy-bird-clone/backend/venv/bin/python3
+#!/Users/zakschenck/Desktop/obstacle-odyssey-backend/backend/venv/bin/python3.11
 # -*- coding: utf-8 -*-
 import re
 import sys

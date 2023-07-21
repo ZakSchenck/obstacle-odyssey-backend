@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/zakschenck/Desktop/flappy-bird-clone/backend/venv"
+VIRTUAL_ENV="/Users/zakschenck/Desktop/obstacle-odyssey-backend/backend/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
