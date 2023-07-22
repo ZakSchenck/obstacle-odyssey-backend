@@ -7,6 +7,7 @@ from src.constants.http_status_codes import (
     HTTP_401_UNAUTHORIZED
 )
 import os
+from flask_cors import CORS 
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../instance/leaderboard.db'
@@ -14,6 +15,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 api_key = os.environ.get('API_KEY')
 
 from src.models import db, Player
+CORS(app, origins='https://zakschenck.github.io/obstacle-odyssey')
 
 db.init_app(app)
 migrate = Migrate(app, db)
